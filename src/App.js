@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Fragment,useState,useRef} from 'react';
 
-function App() {
+const App = () =>{
+  const [name, setName] = useState('');
+  const inputRef = useRef();
+
+  const setNameHandler = (event) =>{
+    setName(event.target.value);
+  }
+
+  const focus = () => {
+    inputRef.current.focus();
+    console.log(inputRef.current.value);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <input ref={inputRef} value={name} onChange={setNameHandler} type="text" />
+      <div>My name is {name}</div>
+      <button onClick={focus}>Focus</button>
+    </Fragment>
   );
 }
 
